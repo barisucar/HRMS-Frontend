@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Table } from "semantic-ui-react";
 import JobAdvertService from "../services/jobAdvertService";
 
@@ -10,7 +11,7 @@ const [jobAdverts, setjobAdverts] = useState([])
     useEffect(() => {
         let jobAdvertService = new JobAdvertService()
         jobAdvertService.getJobAdvert().then(result=>setjobAdverts(result.data.data))
-    })
+    },[])
 
   return (
     <div>
@@ -28,9 +29,9 @@ const [jobAdverts, setjobAdverts] = useState([])
 
         <Table.Body>
           {jobAdverts.map((jobAdvert) => (
-            <Table.Row>
-              <Table.Cell>{jobAdvert.job.jobName}</Table.Cell>
-              <Table.Cell>{jobAdvert.city.cityName}</Table.Cell>
+            <Table.Row key={jobAdvert.jobAdvertisementId}>
+              <Table.Cell><Link to={`/job-adverts/${jobAdvert.jobAdvertisementId}`}>{jobAdvert?.job?.jobName}</Link></Table.Cell>
+              <Table.Cell>{jobAdvert?.city?.cityName}</Table.Cell>
               <Table.Cell>{jobAdvert.jobDescription}</Table.Cell>
               <Table.Cell>{jobAdvert.minSalary}</Table.Cell>
               <Table.Cell>{jobAdvert.numberOfOpenPositions}</Table.Cell>
