@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Table } from "semantic-ui-react";
-import JobAdvertService from "../services/jobAdvertService";
+import JobAdvertService from "../services/JobAdvertService";
 
 export default function JobAdvertList() {
 

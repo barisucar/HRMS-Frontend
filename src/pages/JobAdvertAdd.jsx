@@ -2,7 +2,7 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Button, Dropdown, Form, Message } from "semantic-ui-react";
-import JobAdvertService from "../services/jobAdvertService";
+import JobAdvertService from "../services/JobAdvertService";
 
 export default function JobAdvertAdd() {
   const {

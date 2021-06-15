@@ -10,4 +10,9 @@ export default class JobAdvertService {
         return axios.post("http://localhost:8080/api/JobAdvertisements/add" )
     }
 
+    confirmJobAdvert(id) {
+        return axios.post("http://localhost:8080/api/JobAdvertisements/getAllConfirmedJobAdvertisements?id"+id)
+    }
+
+
 }
