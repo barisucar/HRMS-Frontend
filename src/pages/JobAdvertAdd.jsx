@@ -3,29 +3,23 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Button, Dropdown, Form, Message } from "semantic-ui-react";
 import JobAdvertService from "../services/JobAdvertService";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function JobAdvertAdd() {
-  const {
-    values,
-    errors,
-    handleChange,
-    handleSubmit,
-    handleReset,
-    dirty,
-    isSubmitting,
-    touched,
-  } = useFormik({
+  let jobAdvertService = new JobAdvertService();
+
+  const { values, errors, handleChange, handleSubmit, touched } = useFormik({
     initialValues: {
       jobDescription: "",
       minSalary: "",
       maxSalary: "",
-      openPositionCount: "",
+      numberOfOpenPositions: "",
       applicationDeadline: "",
       employerId: "",
       jobPositionId: "",
       cityId: "",
       workType: "",
-      workHourType:"",
+      workHourType: "",
     },
     validationSchema: Yup.object({
       jobDescription: Yup.string().required("Description should not be empty!"),
@@ -42,8 +36,7 @@ export default function JobAdvertAdd() {
       cityId: Yup.number().required("City should not be empty!"),
     }),
     onSubmit: (values) => {
-      let jobAdvertService = new JobAdvertService();
-      jobAdvertService.add(values).then();
+      jobAdvertService.addJobAdvert(values).then();
     },
   });
 
@@ -75,7 +68,8 @@ export default function JobAdvertAdd() {
 
   return (
     <div>
-      <Form onSubmit={handleSubmit}>
+      <ToastContainer position="bottom-right" />
+      <form onSubmit={handleSubmit && toast.success("Ilan verildi!")  }>
         <Form.Field>
           <label>Açıklama</label>
           <input
@@ -115,13 +109,13 @@ export default function JobAdvertAdd() {
         <Form.Field>
           <label>Açık Pozisyon Sayısı</label>
           <input
-            name="openPositionCount"
+            name="numberOfOpenPositions"
             placeholder="Açık Pozisyon Sayısı"
-            value={values.openPositionCount}
+            value={values.numberOfOpenPositions}
             onChange={handleChange}
           />
-          {errors.openPositionCount && touched.openPositionCount && (
-            <Message color="red">{errors.openPositionCount}</Message>
+          {errors.numberOfOpenPositions && touched.numberOfOpenPositions && (
+            <Message color="red">{errors.numberOfOpenPositions}</Message>
           )}
         </Form.Field>
         <Form.Field>
@@ -172,7 +166,7 @@ export default function JobAdvertAdd() {
             fluid
             selection
             options={workTypeOptions}
-          />          
+          />
         </Form.Field>
         <Form.Field>
           <label>Çalışma Saati</label>
@@ -181,10 +175,10 @@ export default function JobAdvertAdd() {
             fluid
             selection
             options={workHourTypeOptions}
-          />          
+          />
         </Form.Field>
         <Button type="submit">İlan Ver</Button>
-      </Form>
+      </form>
     </div>
   );
 }
