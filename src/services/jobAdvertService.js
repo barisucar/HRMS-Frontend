@@ -5,6 +5,10 @@ export default class JobAdvertService {
     getJobAdvert() {
         return axios.get("http://localhost:8080/api/JobAdvertisements/getall")
     }
+
+    getJobAdvertByCityId(cityId) {
+        return axios.get(`http://localhost:8080/api/JobAdvertisements/getByCityId?cityId=${cityId}`);
+    }
     
     addJobAdvert(values) {
         return axios({
