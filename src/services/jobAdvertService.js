@@ -2,10 +2,17 @@ import axios from "axios"
 
 export default class JobAdvertService {
     
+
+    
     getJobAdvert() {
         return axios.get("http://localhost:8080/api/JobAdvertisements/getall")
     }
 
+    getJobAdvertPageable(pageNumber,size) {
+        return axios.get(`http://localhost:8080/api/JobAdvertisements/getall_p?page=${pageNumber}&size=${size}`)
+        
+    }
+    //${number}&size=${size}
     getJobAdvertByCityId(cityId) {
         return axios.get(`http://localhost:8080/api/JobAdvertisements/getByCityId?cityId=${cityId}`);
     }

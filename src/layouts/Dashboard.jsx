@@ -10,6 +10,7 @@ import JobAdAdd from "../pages/JobAdAdd";
 import AdminUpdate from "../pages/AdminUpdate";
 import ResumeUpdate from "../pages/ResumeUpdate";
 import JobAdvertListByCity from "../pages/JobAdvertListByCity";
+import JobAdvertListPageable from "../pages/JobAdvertListPageable";
 export default function Dashboard() {
   return (
     <div>
@@ -32,6 +33,8 @@ export default function Dashboard() {
       <Route exact path="/job-ad/add" component={JobAdAdd} />
       <Route exact path="/update/admin" component={AdminUpdate} />
       <Route exact path="/update/resume" component={ResumeUpdate} />
+      <Route exact path="/adverto" component={JobAdvertListPageable} />
+      
     </div>
   );
 }
